@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload notes — GCOEARA Notes Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <div class="container">
+    <div class="form-card form-card--wide">
+      <h2>Add to the catalog</h2>
+      <p class="sub">Share notes, a PYQ paper, or an important-questions list with the whole college.</p>
+
+      <div class="alert alert-error hidden" id="form-alert"></div>
+
+      <form id="upload-form">
+        <div class="field">
+          <label for="note-title">Title</label>
+          <input type="text" id="note-title" required placeholder="e.g. Unit 3 — Database Normalization notes" />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="note-subject">Subject</label>
+            <input type="text" id="note-subject" required placeholder="e.g. Database Management Systems" />
+          </div>
+          <div class="field">
+            <label for="note-type">Type</label>
+            <select id="note-type" required></select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="note-year">Year</label>
+            <select id="note-year" required></select>
+          </div>
+          <div class="field">
+            <label for="note-branch">Branch</label>
+            <select id="note-branch" required></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="note-description">Notes for whoever downloads this (optional)</label>
+          <textarea id="note-description" placeholder="e.g. Covers Unit 3 + solved numericals from 2023 exam"></textarea>
+        </div>
+
+        <div class="field">
+          <label>File</label>
+          <div class="upload-dropzone" id="dropzone">
+            <p style="margin:0 0 4px;">Click to choose a file, or drag it here</p>
+            <p style="margin:0;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);">PDF, DOC(X), PPT(X) or image · up to 15 MB</p>
+            <span class="file-chip hidden" id="file-chip"></span>
+          </div>
+          <input type="file" id="note-file" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png" required class="hidden" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="upload-submit-btn" style="width:100%;">Upload file</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    // escapeHtml is defined in nav.js and reused here
+  </script>
+  <script src="js/upload.js"></script>
+</body>
+</html>

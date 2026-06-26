@@ -1,0 +1,558 @@
+/* ============================================================
+   GCOEARA Notes Portal — Design tokens
+   Concept: a college library's catalog drawer, digitized.
+   Index cards, call-number style codes, rubber-stamp tags.
+   ============================================================ */
+
+:root {
+  --ink: #1b2a4a;
+  --ink-soft: #4a5568;
+  --paper: #f2f0e8;
+  --paper-raised: #ffffff;
+  --line: #d8d4c4;
+  --accent-amber: #c68a1e;
+  --accent-amber-dark: #9c6c14;
+  --stamp-red: #b23a2e;
+  --type-notes: #1b2a4a;
+  --type-pyq: #b23a2e;
+  --type-imp: #c68a1e;
+  --radius: 3px;
+  --shadow-card: 0 1px 2px rgba(27, 42, 74, 0.08), 0 1px 0 rgba(27, 42, 74, 0.04);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 100% 32px, 32px 100%;
+  background-position: 0 0;
+  background-attachment: local;
+}
+
+/* subtle: only show the faint grid on wide screens, paper texture elsewhere */
+@media (max-width: 700px) {
+  body {
+    background-image: none;
+  }
+}
+
+a {
+  color: var(--ink);
+}
+
+img {
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-amber-dark);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- Header / Nav ---------- */
+
+.site-header {
+  border-bottom: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  max-width: 1080px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.brand__title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-user {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-right: 4px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-primary:hover {
+  background: #25395f;
+}
+
+.btn-accent {
+  background: var(--accent-amber);
+  border-color: var(--accent-amber-dark);
+  color: #1b1500;
+}
+
+.btn-accent:hover {
+  background: var(--accent-amber-dark);
+}
+
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink-soft);
+}
+
+.btn-danger {
+  border-color: var(--stamp-red);
+  color: var(--stamp-red);
+}
+
+.btn-danger:hover {
+  background: var(--stamp-red);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------- Hero / Catalog drawer filter strip ---------- */
+
+.catalog-hero {
+  padding: 40px 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.catalog-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 46px);
+  font-weight: 600;
+  margin: 0 0 6px;
+  line-height: 1.05;
+}
+
+.catalog-hero p {
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin: 0 0 24px;
+}
+
+.drawer {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.drawer__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.filter-row--search {
+  margin-top: 10px;
+  grid-template-columns: 1fr;
+}
+
+/* Year tabs */
+.year-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.year-tab {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.year-tab.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Forms ---------- */
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='search'],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--ink);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 560px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-card {
+  max-width: 440px;
+  margin: 48px auto;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+}
+
+.form-card--wide {
+  max-width: 640px;
+}
+
+.form-card h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  margin-top: 0;
+}
+
+.form-card .sub {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 24px;
+}
+
+.form-footer-note {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 18px;
+  text-align: center;
+}
+
+.alert {
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  margin-bottom: 16px;
+  border: 1px solid transparent;
+}
+
+.alert-error {
+  background: #fbeae8;
+  border-color: var(--stamp-red);
+  color: #7a261d;
+}
+
+.alert-success {
+  background: #eef6f0;
+  border-color: #2f6b4f;
+  color: #214c38;
+}
+
+/* ---------- Notes grid + index cards ---------- */
+
+.results-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 24px 0 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.results-count {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+  padding: 0 0 40px;
+}
+
+.note-card {
+  position: relative;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 16px 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.note-card__callnumber {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+.note-card__title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.note-card__subject {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.note-card__desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  flex-grow: 1;
+}
+
+.note-card__meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+}
+
+.note-card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* The signature element: a rotated rubber-stamp badge marking the doc type */
+.stamp {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  transform: rotate(-6deg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border: 1.5px dashed;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.stamp--notes {
+  color: var(--type-notes);
+  border-color: var(--type-notes);
+}
+
+.stamp--pyq {
+  color: var(--type-pyq);
+  border-color: var(--type-pyq);
+}
+
+.stamp--imp {
+  color: var(--type-imp);
+  border-color: var(--accent-amber-dark);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ink-soft);
+}
+
+.empty-state__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+/* ---------- Pagination ---------- */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 50px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 0 40px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+/* ---------- Upload page extras ---------- */
+
+.upload-dropzone {
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.upload-dropzone.is-dragover {
+  border-color: var(--ink);
+  background: #ece9dd;
+}
+
+.file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none !important;
+}

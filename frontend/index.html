@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GCOEARA Notes Catalog — Notes, PYQs & Important Questions</title>
+  <meta name="description" content="Year-wise and branch-wise notes, PYQs and important questions shared by students of Government College of Engineering and Research, Awasari Kh." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <section class="catalog-hero">
+    <div class="container">
+      <h1>Find your notes.</h1>
+      <p>Notes, PYQs and important questions shared by GCOEARA students — sorted by year and branch so you spend less time searching and more time studying.</p>
+
+      <div class="drawer">
+        <div class="drawer__label">Drawer — filter by year</div>
+        <div class="year-tabs" id="year-tabs"></div>
+
+        <div class="filter-row">
+          <select id="branch-select" aria-label="Filter by branch"></select>
+          <select id="type-select" aria-label="Filter by document type"></select>
+        </div>
+        <div class="filter-row filter-row--search">
+          <input type="search" id="subject-search" placeholder="Search by subject, e.g. Data Structures, Thermodynamics…" aria-label="Search by subject" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="results-bar">
+      <span class="results-count" id="results-count">Loading…</span>
+    </div>
+    <div class="notes-grid" id="notes-grid"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Built by Pranav Jadhav, for students — Government College of Engineering and Research, Awasari Kh., Pune (SPPU)
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
