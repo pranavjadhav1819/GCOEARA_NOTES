@@ -1,0 +1,2 @@
+Add-Content -Path .gitignore -Value ".env"
+Add-Content -Path .gitignore -Value "node_modules/"
