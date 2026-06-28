@@ -1,7 +1,10 @@
 const { findByEmail, createUser, matchPassword, toSafeObject } = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const { YEARS, BRANCH_CODES } = require('../config/constants');
+const supabase = require('../config/db');
 
+// @route  POST /api/auth/register
+// @access Public
 const register = async (req, res, next) => {
   try {
     const { name, email, password, branch, year } = req.body;
@@ -24,6 +27,8 @@ const register = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// @route  POST /api/auth/login
+// @access Public
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -36,9 +41,50 @@ const login = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
+// @route  GET /api/auth/me
+// @access Private
 const getMe = async (req, res) => {
-  const { toSafeObject } = require('../models/User');
   res.json({ user: toSafeObject(req.user) });
 };
 
-module.exports = { register, login, getMe };
+// @route  POST /api/auth/google
+// @access Public — exchanges a Supabase Google token for our own JWT
+const googleAuth = async (req, res, next) => {
+  try {
+    const { access_token } = req.body;
+    if (!access_token)
+      return res.status(400).json({ message: 'Access token is required.' });
+
+    // Verify token with Supabase and get Google user info
+    const { data: { user: googleUser }, error } = await supabase.auth.getUser(access_token);
+
+    if (error || !googleUser)
+      return res.status(401).json({ message: 'Invalid or expired Google token.' });
+
+    // Find existing user or create a new one
+    let user = await findByEmail(googleUser.email);
+
+    if (!user) {
+      // Generate a random secure password for Google users
+      const randomPassword = Math.random().toString(36).slice(-8) +
+                             Math.random().toString(36).slice(-8) + 'Gg1!';
+      const fullName = googleUser.user_metadata?.full_name ||
+                       googleUser.user_metadata?.name ||
+                       googleUser.email.split('@')[0];
+
+      user = await createUser({
+        name: fullName,
+        email: googleUser.email,
+        password: randomPassword,
+        role: 'student'
+      });
+    }
+
+    res.json({
+      user: toSafeObject(user),
+      token: generateToken(user.id)
+    });
+  } catch (err) { next(err); }
+};
+
+module.exports = { register, login, getMe, googleAuth };
