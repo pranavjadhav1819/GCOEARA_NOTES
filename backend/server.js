@@ -1,4 +1,16 @@
-app.use(
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const helmet = require('helmet');
+const authRoutes = require('./routes/authRoutes');
+const noteRoutes = require('./routes/noteRoutes');
+const metaRoutes = require('./routes/metaRoutes');
+const { notFound, errorHandler } = require('./middleware/errorHandler');
+
+const app = express();   // ← app must be defined FIRST
+
+app.use(                 // ← THEN use helmet AFTER app is defined
   helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' },
     contentSecurityPolicy: {
