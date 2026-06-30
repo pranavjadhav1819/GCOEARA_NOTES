@@ -177,9 +177,6 @@ Then go to **Storage** → Create a **Public Bucket** named `notes-files`.
 ### 4️⃣ Configure Environment
 
 ```bash
-cp .env.example .env
-# Fill in your real values in .env
-```
 
 ### 5️⃣ Run Locally
 
