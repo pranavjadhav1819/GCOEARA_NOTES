@@ -170,49 +170,7 @@ cd backend
 npm install
 ```
 
-### 3️⃣ Setup Supabase Database
-
-Go to your Supabase project → **SQL Editor** → Run this:
-
-```sql
-CREATE TABLE users (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name VARCHAR(80) NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  branch VARCHAR(50) DEFAULT NULL,
-  year VARCHAR(20) DEFAULT NULL,
-  role VARCHAR(20) DEFAULT 'student' CHECK (role IN ('student', 'admin')),
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TABLE notes (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  title VARCHAR(150) NOT NULL,
-  subject VARCHAR(100) NOT NULL,
-  description VARCHAR(500) DEFAULT '',
-  year VARCHAR(20) NOT NULL,
-  branch VARCHAR(50) NOT NULL,
-  type VARCHAR(20) NOT NULL,
-  file_name VARCHAR(255) NOT NULL,
-  stored_file_name VARCHAR(255) NOT NULL,
-  file_size INTEGER NOT NULL,
-  mime_type VARCHAR(100) NOT NULL,
-  uploaded_by UUID REFERENCES users(id) ON DELETE SET NULL,
-  uploader_name VARCHAR(80) NOT NULL,
-  downloads INTEGER DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE INDEX idx_notes_year_branch_type ON notes(year, branch, type);
-
-CREATE OR REPLACE FUNCTION increment_note_downloads(note_id UUID)
-RETURNS void AS $$
-  UPDATE notes SET downloads = downloads + 1 WHERE id = note_id;
-$$ LANGUAGE sql;
-```
+### 3️⃣ 
 
 Then go to **Storage** → Create a **Public Bucket** named `notes-files`.
 
@@ -233,24 +191,7 @@ Open [http://localhost:5000](http://localhost:5000) 🎉
 
 ---
 
-## 🔐 Environment Variables
 
-Create `backend/.env` with these values:
-
-```env
-PORT=5000
-NODE_ENV=development
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key-here
-JWT_SECRET=replace_with_long_random_string_min_32_chars
-JWT_EXPIRES_IN=7d
-CLIENT_ORIGIN=http://localhost:5000
-MAX_FILE_SIZE_MB=20
-ALLOWED_EMAIL_DOMAIN=gcoeara.ac.in
-ADMIN_NAME=Your Name
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=StrongPassword123
-```
 
 > ⚠️ **Never commit your `.env` file to GitHub!**
 
